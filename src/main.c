@@ -216,6 +216,11 @@ static int on_config_listen(h2o_configurator_command_t *cmd, h2o_configurator_co
         return -1;
     }
 
+    if (strlen(servname) == 0) {
+        h2o_config_print_error(cmd, config_file, config_node, "the listening address is empty");
+        return -1;
+    }
+
     /* call getaddrinfo */
     memset(&hints, 0, sizeof(hints));
     hints.ai_socktype = SOCK_STREAM;
